@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "name": "Java",
+      "path": "../java"
+    },
+    {
+      "name": "Python",
+      "path": "../python"
+    },
+    {
+      "name": "settings",
+      "path": "../.vscode"
+    }
+  ],
+  "settings": {
+    "java.configuration.updateBuildConfiguration": "automatic",
+  }
+}
