@@ -1,6 +1,6 @@
 package com.works.theory;
 
-import com.utils.Tidbits;
+import com.utils.*;
 
 public class MCD {
 	public static int recursion(int a, int b) {
@@ -26,10 +26,10 @@ public class MCD {
 
 	public static void main(String[] args) {
 		Tidbits.ClearConsole();
-		System.out.println(Tidbits.COLOR_CYAN_BACKGROUND + "     MCD     " + Tidbits.COLOR_RESET);
-		System.out.println(Tidbits.COLOR_RED + "recursion" + Tidbits.COLOR_RESET);
+		System.out.println(Colors.CYAN_BACKGROUND("     MCD     "));
+		System.out.println(Colors.COLOR_RED("recursion"));
 		System.out.println(recursion(24, 18));
-		System.out.println(Tidbits.COLOR_YELLOW + "recursion" + Tidbits.COLOR_RESET);
+		System.out.println(Colors.COLOR_YELLOW("recursion"));
 		System.out.println(noRecursion(24, 18));
 	}
 

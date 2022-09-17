@@ -3,7 +3,7 @@ package com.oldWork.thinking.convert;
 import java.util.*;
 import java.util.regex.Pattern;
 
-import com.utils.Tidbits;
+import com.utils.*;
 
 import java.util.regex.Matcher;
 
@@ -57,8 +57,8 @@ public class BinaryClass {
 
         if (type) {
             System.out.println(
-                    Tidbits.COLOR_GREEN + "Por favor introduzca un " + Tidbits.COLOR_CYAN_BACKGROUND + Tidbits.COLOR_BLACK
-                            + "  decimal  " + Tidbits.COLOR_RESET);
+                    Colors.COLOR_GREEN("Por favor introduzca un ")
+                            + Colors.CYAN_BACKGROUND(Colors.COLOR_BLACK("  decimal  ")));
 
             exit = inputKeyboard.nextLine().toString();
 
@@ -71,8 +71,8 @@ public class BinaryClass {
             }
         } else {
             System.out.println(
-                    Tidbits.COLOR_GREEN + "Por favor introduzca un " + Tidbits.COLOR_CYAN_BACKGROUND + Tidbits.COLOR_BLACK
-                            + "  binario  " + Tidbits.COLOR_RESET);
+                    Colors.COLOR_GREEN("Por favor introduzca un ")
+                            + Colors.CYAN_BACKGROUND(Colors.COLOR_BLACK("  binario  ")));
 
             exit = inputKeyboard.nextLine().toString();
 
@@ -93,7 +93,7 @@ public class BinaryClass {
         String binario = Input(false);
 
         if (binario == "error") {
-            System.out.println(Tidbits.COLOR_RED + "Not input valid" + Tidbits.COLOR_RESET);
+            System.out.println(Colors.COLOR_RED("Not input valid"));
         } else {
             int solved = convert(binario);
             System.out.println(" resultado");

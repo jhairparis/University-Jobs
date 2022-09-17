@@ -3,7 +3,7 @@ package com.oldWork.thinking.convert;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import com.utils.Tidbits;
+import com.utils.*;
 
 import java.util.Scanner;
 
@@ -60,12 +60,12 @@ public class DecimalClass {
             line1 = tabx(tab) + v + " ▌ 2\n";
             line2 = tabx(tab) + generatorSpace(contador(v) + 1) + "▌\n";
             line3 = tabx(tab) + generatorSpace(contador(v) + 1) + "▀▀▀▀▀▀\n";
-            line4 = tabx(tab) + generatorSpace(contador(R.get(i))) + Tidbits.COLOR_RED + R.get(i)
-                    + Tidbits.COLOR_RESET + " ▌ " + Tidbits.COLOR_GREEN + Q.get(i);
+            line4 = tabx(tab) + generatorSpace(contador(R.get(i))) + Colors.COLOR_RED(R.get(i))
+                    + " ▌ " + Colors.COLOR_GREEN(Q.get(i));
 
             String Templete = line + line1 + line2 + line3 + line4;
 
-            System.out.println(Tidbits.COLOR_BLUE + Templete + "\n" + Tidbits.COLOR_RESET);
+            System.out.println(Colors.COLOR_BLUE(Templete + "\n"));
             tab++;
         }
 
@@ -77,7 +77,7 @@ public class DecimalClass {
         Scanner lector = new Scanner(System.in); // Creación de un objeto Scanner
 
         if (decimalString == "error") {
-            System.out.println(Tidbits.COLOR_RED + "Not input valid" + Tidbits.COLOR_RESET);
+            System.out.println(Colors.COLOR_RED("Not input valid"));
         } else {
 
             ArrayList<Integer> quotient = new ArrayList<>();
@@ -103,9 +103,9 @@ public class DecimalClass {
             String listString = remainder.stream().map(Object::toString).collect(Collectors.joining(" "));
 
             System.out.println(
-                    Tidbits.COLOR_CYAN + "Answer  " + Tidbits.COLOR_GREEN + listString + Tidbits.COLOR_RESET);
+                    Colors.COLOR_CYAN("Answer  ") + Colors.COLOR_GREEN(listString));
 
-            System.out.println(Tidbits.COLOR_RED + "Ver proceso?" + Tidbits.COLOR_RESET + "  presiona Enter|n");
+            System.out.println(Colors.COLOR_RED("Ver proceso?") + "  presiona Enter|n");
 
             String enterkey = lector.nextLine();
 

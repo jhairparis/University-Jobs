@@ -5,27 +5,6 @@ import java.util.Scanner;
 import java.io.*;
 
 public class Tidbits {
-    //  Letters colors
-    public static final String COLOR_BLACK = "\u001B[30m";
-    public static final String COLOR_RED = "\u001B[31m";
-    public static final String COLOR_GREEN = "\u001B[32m";
-    public static final String COLOR_YELLOW = "\u001B[33m";
-    public static final String COLOR_BLUE = "\u001B[34m";
-    public static final String COLOR_PURPLE = "\u001B[35m";
-    public static final String COLOR_CYAN = "\u001B[36m";
-    public static final String COLOR_WHITE = "\u001B[37m";
-
-    public static final String COLOR_RESET = "\u001B[0m";
-
-    //  Background colors
-    public static final String COLOR_BLACK_BACKGROUND = "\u001B[40m";
-    public static final String COLOR_RED_BACKGROUND = "\u001B[41m";
-    public static final String COLOR_GREEN_BACKGROUND = "\u001B[42m";
-    public static final String COLOR_YELLOW_BACKGROUND = "\u001B[43m";
-    public static final String COLOR_BLUE_BACKGROUND = "\u001B[44m";
-    public static final String COLOR_PURPLE_BACKGROUND = "\u001B[45m";
-    public static final String COLOR_CYAN_BACKGROUND = "\u001B[46m";
-    public static final String COLOR_WHITE_BACKGROUND = "\u001B[47m";
 
     public static void ClearConsole() {
         try {
@@ -66,17 +45,16 @@ public class Tidbits {
         double opcion = 0.0;// Guardamos opcion del usuarion
 
         while (!salir) {
-            System.out.println(COLOR_BLUE_BACKGROUND + COLOR_WHITE
-                    + "0) Salir         0.1)nextPag            0.2)prevPag               Pag-" + (pag + 1) + "-" + pagT
-                    + COLOR_RESET);
+            String menuTop = "0) Salir         0.1)nextPag            0.2)prevPag               Pag-"
+                    + (pag + 1) + "-" + pagT;
+            System.out.println(Colors.BLUE_BACKGROUND(Colors.COLOR_WHITE(menuTop)));
 
             int fin = options[pag].length;
 
             for (int i = 0; i < fin; i++) {
-                System.out.println(COLOR_GREEN + (i + 1) + ") " + COLOR_RESET + options[pag][i]);
-                if (imagen) {
+                System.out.println(Colors.COLOR_GREEN((i + 1) + ") ") + options[pag][i]);
+                if (imagen)
                     imageInConsole(comando + " ej" + (pag + 1) + "=" + i);
-                }
             }
 
             System.out.println("\n");
@@ -94,7 +72,7 @@ public class Tidbits {
                     pag -= 1;
                 } else {
                     ClearConsole();
-                    System.out.println(COLOR_RED + "No hay mas paginas" + COLOR_RESET);
+                    System.out.println(Colors.COLOR_RED("No hay mas paginas"));
                 }
             } else if (opcion == 0) {
                 ClearConsole();
@@ -106,7 +84,7 @@ public class Tidbits {
                 return select;
             } else {
                 ClearConsole();
-                System.out.println(COLOR_RED + "La opccion no existe" + COLOR_RESET);
+                System.out.println(Colors.COLOR_RED("La opccion no existe"));
             }
         }
         double[] select = { pag, opcion };
@@ -116,43 +94,73 @@ public class Tidbits {
 
     public static void Start() {
         ClearConsole();
-        String Logo = COLOR_RED + "                                  /   \\ \n " + COLOR_YELLOW + "_" + COLOR_RED
-                + "                        )      ((   ))     ( \n" + COLOR_YELLOW + "(@)" + COLOR_RED
-                + "                      /|\\      ))_((     /|\\ \n" + COLOR_YELLOW + "|-|" + COLOR_RED
-                + "                     / | \\    (/\\|/\\)   / | \\                      " + COLOR_YELLOW + "(@)"
-                + COLOR_RED + " \n" + COLOR_YELLOW + "| |" + COLOR_RED + " " + COLOR_YELLOW + "-------------------"
-                + COLOR_RED + "/" + COLOR_YELLOW + "--" + COLOR_RED + "|" + COLOR_YELLOW + "-------" + COLOR_RED
-                + "\\|/"
-                + COLOR_YELLOW + "------" + COLOR_RED + "|" + COLOR_YELLOW + "--" + COLOR_RED + "\\" + COLOR_YELLOW
-                + "---------------------" + COLOR_YELLOW + "|-|" + COLOR_RED + " \n" + COLOR_YELLOW + "|-|" + COLOR_RED
-                + "                         '^`   (o o)  '^`                          " + COLOR_YELLOW + "| |"
-                + COLOR_RED
-                + " \n" + COLOR_YELLOW + "| |" + COLOR_RED
-                + "                               `\\Y/'                               " + COLOR_YELLOW + "|-|"
-                + COLOR_RED + " \n" + COLOR_YELLOW + "|-|" + COLOR_RED
-                + "                                                                   " + COLOR_YELLOW + "| |"
-                + COLOR_RED
-                + " \n" + COLOR_YELLOW + "| | " + COLOR_RED + "                            " + COLOR_CYAN
-                + "Jhair Paris"
-                + COLOR_RED + "                           " + COLOR_YELLOW + "|-|" + COLOR_RED + " \n" + COLOR_YELLOW
-                + "|-|" + COLOR_RED + "                          " + COLOR_PURPLE + "" + COLOR_GREEN
-                + " @IllustriousLoop"
-                + COLOR_RED + "                       " + COLOR_YELLOW + "| |" + COLOR_RED + " \n" + COLOR_YELLOW
-                + "| |" + COLOR_RED + "                                                                   "
-                + COLOR_YELLOW
-                + "|-|" + COLOR_RED + " \n" + COLOR_YELLOW + "|_|"
-                + "___________________________________________________________________" + COLOR_YELLOW + "| |"
-                + COLOR_RED
-                + " \n" + COLOR_YELLOW + "(@)" + COLOR_RED
-                + "              l   /\\ /         ( (       \\ /\\   l                " + COLOR_YELLOW + "`\\"
-                + COLOR_YELLOW + "|-|" + COLOR_RED
-                + " \n                 l /   V           \\ \\       V   \\ l                  " + COLOR_YELLOW + "(@)"
-                + COLOR_RED
-                + " \n                 l/                _) )_          \\I \n                                   `\\ /'            "
-                + COLOR_RESET;
+        String Logo = Colors.COLOR_RED("                                  /   \\ \n ")
+                + Colors.COLOR_YELLOW("_")
+                + Colors.COLOR_RED("                        )      ((   ))     ( \n")
+                + Colors.COLOR_YELLOW("(@)")
+                + Colors.COLOR_RED("                      /|\\      ))_((     /|\\ \n")
+                + Colors.COLOR_YELLOW("|-|")
+                + Colors.COLOR_RED("                     / | \\    (/\\|/\\)   / | \\                      ")
+                + Colors.COLOR_YELLOW("(@)")
+                + Colors.COLOR_RED(" \n")
+                + Colors.COLOR_YELLOW("| |")
+                + Colors.COLOR_RED(" ")
+                + Colors.COLOR_YELLOW("-------------------")
+                + Colors.COLOR_RED("/")
+                + Colors.COLOR_YELLOW("--")
+                + Colors.COLOR_RED("|")
+                + Colors.COLOR_YELLOW("-------")
+                + Colors.COLOR_RED("\\|/")
+                + Colors.COLOR_YELLOW("------")
+                + Colors.COLOR_RED("|")
+                + Colors.COLOR_YELLOW("--")
+                + Colors.COLOR_RED("\\")
+                + Colors.COLOR_YELLOW("---------------------")
+                + Colors.COLOR_YELLOW("|-|")
+                + Colors.COLOR_RED(" \n")
+                + Colors.COLOR_YELLOW("|-|")
+                + Colors.COLOR_RED("                         '^`   (o o)  '^`                          ")
+                + Colors.COLOR_YELLOW("| |")
+                + Colors.COLOR_RED(" \n")
+                + Colors.COLOR_YELLOW("| |")
+                + Colors.COLOR_RED("                               `\\Y/'                               ")
+                + Colors.COLOR_YELLOW("|-|")
+                + Colors.COLOR_RED(" \n")
+                + Colors.COLOR_YELLOW("|-|")
+                + Colors.COLOR_RED("                                                                   ")
+                + Colors.COLOR_YELLOW("| |")
+                + Colors.COLOR_RED(" \n")
+                + Colors.COLOR_YELLOW("| | ")
+                + Colors.COLOR_RED("                            ")
+                + Colors.COLOR_CYAN("Jhair Paris")
+                + Colors.COLOR_RED("                           ")
+                + Colors.COLOR_YELLOW("|-|")
+                + Colors.COLOR_RED(" \n")
+                + Colors.COLOR_YELLOW("|-|")
+                + Colors.COLOR_RED("                          ")
+                + Colors.COLOR_PURPLE("")
+                + Colors.COLOR_GREEN(" @IllustriousLoop")
+                + Colors.COLOR_RED("                       ")
+                + Colors.COLOR_YELLOW("| |")
+                + Colors.COLOR_RED(" \n")
+                + Colors.COLOR_YELLOW("| |")
+                + Colors.COLOR_RED("                                                                   ")
+                + Colors.COLOR_YELLOW("|-|")
+                + Colors.COLOR_RED(" \n")
+                + Colors.COLOR_YELLOW("|_|" + "___________________________________________________________________")
+                + Colors.COLOR_YELLOW("| |")
+                + Colors.COLOR_RED(" \n")
+                + Colors.COLOR_YELLOW("(@)")
+                + Colors.COLOR_RED("              l   /\\ /         ( (       \\ /\\   l                ")
+                + Colors.COLOR_YELLOW("`\\")
+                + Colors.COLOR_YELLOW("|-|")
+                + Colors.COLOR_RED(" \n                 l /   V           \\ \\       V   \\ l                  ")
+                + Colors.COLOR_YELLOW("(@)")
+                + Colors.COLOR_RED(
+                        " \n                 l/                _) )_          \\I \n                                   `\\ /'            ");
         System.out.println(Logo);
         try {
-            Thread.sleep(650);
+            Thread.sleep(850);
         } catch (Exception e) {
 
         }

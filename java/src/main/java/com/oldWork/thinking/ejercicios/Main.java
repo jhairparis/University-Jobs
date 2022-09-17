@@ -2,7 +2,7 @@ package com.oldWork.thinking.ejercicios;
 
 import java.util.*;
 
-import com.utils.Tidbits;
+import com.utils.*;
 
 public class Main {
     private static int A = 0, B = 0, C = 0, D = 0;
@@ -10,8 +10,9 @@ public class Main {
 
     private static void defaultx() {
         loop = true;
-        System.out.println(Tidbits.COLOR_RED + " " + Tidbits.COLOR_RESET
-                + "Has salido o seleccion algo que no existe " + Tidbits.COLOR_RED + "" + Tidbits.COLOR_RESET);
+        System.out.println(
+                Colors.COLOR_RED(" ")
+                        + "Has salido o seleccion algo que no existe " + Colors.COLOR_RED(""));
     }
 
     public static void seleccion() {
@@ -28,8 +29,8 @@ public class Main {
 
         String[][] options = { ejerciosde1, ejerciosde2, ejerciosde3, ejerciosde31 };
 
-        System.out.println(Tidbits.COLOR_RED_BACKGROUND + "Recuerda los valores A: " + A + " B: " + B + " C:" + C
-                + " D:" + D + Tidbits.COLOR_RESET);
+        System.out.println(
+                Colors.RED_BACKGROUND("Recuerda los valores A: " + A + " B: " + B + " C:" + C + " D:" + D));
 
         double[] seleccion = Tidbits.GeneratorOptions(options, true, comando);
 
