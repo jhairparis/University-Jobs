@@ -21,6 +21,43 @@ public class Tidbits {
         }
     }
 
+    public static String exponentText(double x, int nN) {
+        String n = "";
+        switch (nN) {
+            case 0:
+                n = "\u2070";
+                break;
+            case 1:
+                n = "\u00B9";
+                break;
+            case 2:
+                n = "\u00B2";
+                break;
+            case 3:
+                n = "\u00B3";
+                break;
+            case 4:
+                n = "\u2074";
+                break;
+            case 5:
+                n = "\u2075";
+                break;
+            case 6:
+                n = "\u2076";
+                break;
+            case 7:
+                n = "\u2077";
+                break;
+            case 8:
+                n = "\u2078";
+                break;
+            case 9:
+                n = "\u2079";
+                break;
+        }
+        return x + Colors.COLOR_RED(n);
+    }
+
     public static void imageInConsole(String command) {
         String string = "";
         try {
