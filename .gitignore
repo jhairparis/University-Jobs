@@ -4,3 +4,4 @@ target
 .classpath
 .factorypath
 .idea
+**/node_modules
