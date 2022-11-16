@@ -1,33 +1,74 @@
 package com.utils;
 
-import javax.swing.JFrame;
+import java.awt.Color;
+import java.util.ArrayList;
+// import java.awt.BasicStroke;
+import java.awt.Dimension;
 
-import org.math.plot.*;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.chart.ui.ApplicationFrame;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.xy.XYSeriesCollection;
 
-public class Graph {
-	private Plot2DPanel plot = new Plot2DPanel();
-	private JFrame frame = new JFrame("Graph");
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+
+public class Graph extends ApplicationFrame {
+	private XYSeriesCollection dataset = new XYSeriesCollection();
+	private String xAxisLabel = "Category";
+	private String yAxisLabel = "Score";
 
 	public Graph() {
-		plot.addLegend("SOUTH");
-		plot.removePlotToolBar();
-		frame.setContentPane(plot);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		super("");
 	}
 
-	public void show() {
-		frame.setVisible(true);
+	public void createDataset(ArrayList<Number> x, ArrayList<Number> y, String name) {
+		final XYSeries search = new XYSeries(name);
+
+		if (x.size() != y.size())
+			return;
+
+		for (int i = 0; i < x.size(); i++)
+			search.add(x.get(i), y.get(i));
+
+		dataset.addSeries(search);
 	}
 
-	public void addLine(double[] X, double[] Y, String name) {
-		plot.addLinePlot(name, X, Y);
+	public void show(String chartTitle) {
+		JFreeChart xylineChart = ChartFactory.createXYLineChart(
+				chartTitle,
+				xAxisLabel,
+				yAxisLabel,
+				dataset,
+				PlotOrientation.VERTICAL,
+				true, true, false);
+
+		ChartPanel chartPanel = new ChartPanel(xylineChart);
+		chartPanel.setPreferredSize(new Dimension(560, 367));
+
+		XYPlot plot = xylineChart.getXYPlot();
+		XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+		renderer.setSeriesPaint(0, Color.RED);
+		renderer.setSeriesPaint(1, Color.GREEN);
+		// renderer.setSeriesStroke(0, new BasicStroke(4.0f));
+		// renderer.setSeriesStroke(1, new BasicStroke(3.0f));
+		// renderer.setSeriesStroke(2, new BasicStroke(2.0f));
+		plot.setRenderer(renderer);
+
+		this.setContentPane(chartPanel);
+		this.pack();
+		this.setVisible(true);
 	}
 
-	public void setMinMaxAxis(double min, double max) {
-		plot.setFixedBounds(0, min, max);
+	public void setxAxisLabel(String xAxisLabel) {
+		this.xAxisLabel = xAxisLabel;
 	}
 
-	public void addPointLine(double[] X, double[] Y, String name) {
-		plot.addBarPlot(name, X, Y);
+	public void setyAxisLabel(String yAxisLabel) {
+		this.yAxisLabel = yAxisLabel;
 	}
+
 }
