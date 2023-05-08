@@ -144,7 +144,10 @@ def main():
         screen.blit(textButton1, positionButton1)
 
         textButton2 = font.render(msg2, True, colorButton2)
-        positionButton2 = textButton2.get_rect(topleft=(width-60,10))
+        p = (width-60,10)
+        if cellAdd == 0:
+            p = (width-120,10)
+        positionButton2 = textButton2.get_rect(topleft=p)
         screen.blit(textButton2, positionButton2)
 
         textButton3 = font.render(msg3, True, colorButton3)
