@@ -5,6 +5,7 @@ The Commands Book is a comprehensive guide that provides step-by-step instructio
 ## Table of Contents
 
 1. [Rename Router](#rename-router)
+2. [Script Router Config](config_router.zsh)
 
 ## Rename Router
 
