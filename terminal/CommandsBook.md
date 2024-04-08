@@ -6,7 +6,7 @@ The Commands Book is a comprehensive guide that provides step-by-step instructio
 
 1. [Rename Router](#rename-router)
 2. [Script Router Config](config_router.zsh)
-3. [Script Lab VLAN](LabVLAN.zsh)
+3. [Script Lab VLAN](./vlan/LabVLAN.md)
 
 ## Rename Router
 
