@@ -34,16 +34,17 @@ def play_game(game, strategies: dict, verbose=False):
     """Play a turn-taking game. `strategies` is a {player_name: function} dict,
     where function(state, game) is used to get the player's move."""
     state = game.initial
-    count = 100
-    while count > 0 or not game.is_terminal(state):
-        print(count)
+    # count = 100
+    # while count > 0 or not game.is_terminal(state):
+    # print(count)
+    while not game.is_terminal(state):
         player = state.to_move
         move = strategies[player](game, state)
         state = game.result(state, move)
         if verbose:
             print("Player", player, "move:", move)
             print(state)
-        count = count - 1
+        # count = count - 1
     return state
 
 
@@ -117,6 +118,8 @@ class friends(Game):
     def __init__(self, n=5):
         self.n = n
         self.initial = Board(height=1, width=n, to_move="X", utility=0).friendInit(n)
+        self.visit = {}
+        self.draw = False
 
     def actions(self, state):
         """Return a collection of the allowable moves from this state."""
@@ -144,23 +147,10 @@ class friends(Game):
     def result(self, state, move):
         """Return the state that results from making a move from a state."""
         player = state.to_move
-        print(player)
         opponent = "O" if player == "X" else "X"
 
+        self.visit[str(state)] = 1
         state = state.new2({move: player}, to_move=opponent)
-
-        win = False
-
-        if state[self.n - 1, 0] == "X" or state[0, 0] == "O":
-            win = True
-
-        if win:
-            if player == "X":
-                state.utility = +1
-            else:
-                state.utility = -1
-        else:
-            state.utility = 0
 
         return state
 
@@ -170,11 +160,26 @@ class friends(Game):
 
         if state[self.n - 1, 0] == "X" or state[0, 0] == "O":
             win = True
+        if self.visit.get(str(state), -999) == 1:
+            win = True
+            self.draw = True
+
         return win
 
     def utility(self, state, player):
-        """Return the value to player; 1 for win, -1 for loss, 0 otherwise."""
-        return state.utility if player == "X" else -state.utility
+        """Return the value state.utility"""
+
+        win = self.is_terminal(state)
+
+        if win:
+            if player == "X" and not self.draw:
+                utility = 1
+            if player == "O" and not self.draw:
+                utility = -1
+            if self.draw:
+                utility = 0
+
+        return utility
 
 
 class Board(defaultdict):
@@ -247,4 +252,40 @@ def player(search_algorithm):
 
 
 fx = friends(6)
-ffx = play_game(fx, dict(X=random_player, O=player(alphabeta_search)), verbose=True)
+# ffx = play_game(fx, dict(X=random_player, O=player(alphabeta_search)), verbose=True)
+# ffx = play_game(fx, dict(X=random_player, O=player(minimax_search)), verbose=True)
+# ffx = play_game(fx, dict(X=random_player, O=random_player), verbose=True)
+# print(fx.visit)
+
+""" XGame = friends(6)
+print(XGame.initial)
+
+moveX = XGame.actions(XGame.initial)
+xmove1 = XGame.result(XGame.initial, moveX[0])
+print(xmove1)
+
+moveX2 = XGame.actions(xmove1)
+xmove2 = XGame.result(xmove1, moveX2[0])
+print(xmove2)
+
+moveX3 = XGame.actions(xmove2)
+xmove3 = XGame.result(xmove2, moveX3[0])
+print(xmove3)
+
+moveX4 = XGame.actions(xmove3)
+xmove4 = XGame.result(xmove3, moveX4[1])
+print(xmove4)
+
+moveX5 = XGame.actions(xmove4)
+xmove5 = XGame.result(xmove4, moveX5[0])
+print(xmove5)
+
+moveX6 = XGame.actions(xmove5)
+xmove6 = XGame.result(xmove5, moveX6[1])
+print(xmove6)
+
+moveX7 = XGame.actions(xmove6)
+xmove7 = XGame.result(xmove6, moveX7[0])
+print(xmove7)
+
+print(XGame.is_terminal(xmove7)) """
