@@ -1,4 +1,4 @@
-# Commands Book
+# Telecomunicaciones
 
 The Commands Book is a comprehensive guide that provides step-by-step instructions for various operations and tasks. This book is particularly useful for those who are new to these commands or those who need a quick reference. The current edition includes detailed procedures for renaming a router using MobaXterm, complete with screenshots and commands. Each step is clearly explained, making it easy for users to follow along.
 
@@ -16,7 +16,7 @@ First open [MobaXterm](https://mobaxterm.mobatek.net/download.html) and click se
 
 **Image:**
 
-![Screenshot of MobaXterm home page](./src/First.png)
+![Screenshot of MobaXterm home page](./images/First.png)
 
 ### Step 2
 
@@ -24,7 +24,7 @@ Click serial and select serial port **COM**
 
 **Image:**
 
-![Screenshot of session window](./src/Second.png)
+![Screenshot of session window](./images/Second.png)
 
 ### Step 3
 
@@ -32,7 +32,7 @@ Write ***no*** to first question
 
 **Image:**
 
-![Screenshot of terminal](./src/Third.png)
+![Screenshot of terminal](./images/Third.png)
 
 ### Step 4
 
@@ -46,7 +46,7 @@ show startup-config
 
 **Image:**
 
-![Screenshot of terminal](./src/Four.png)
+![Screenshot of terminal](./images/Four.png)
 
 ### Step 5
 
@@ -60,7 +60,7 @@ enable
 
 **Image:**
 
-![Screenshot of terminal](./src/Five.png)
+![Screenshot of terminal](./images/Five.png)
 
 ### Step 6
 
@@ -75,7 +75,7 @@ hostname {{your name}}
 
 **Image:**
 
-![Screenshot of terminal](./src/Six.png)
+![Screenshot of terminal](./images/Six.png)
 
 ### Step 7
 
@@ -89,7 +89,7 @@ exit
 
 **Image:**
 
-![Screenshot of terminal](./src/Seven.png)
+![Screenshot of terminal](./images/Seven.png)
 
 ### Step 8
 
@@ -103,7 +103,7 @@ copy running-config startup-config
 
 **Image:**
 
-![Screenshot of terminal](./src/Eight.png)
+![Screenshot of terminal](./images/Eight.png)
 
 > [!NOTE]  
 > to view file running or startup you can use `show running-config`
