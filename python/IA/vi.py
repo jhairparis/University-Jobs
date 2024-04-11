@@ -266,10 +266,11 @@ def player(search_algorithm):
 
 
 fx = friends(6)
-ffx = play_game(fx, dict(X=random_player, O=player(alphabeta_search)), verbose=True)
-ffx = play_game(fx, dict(X=random_player, O=player(minimax_search)), verbose=True)
+# ffx = play_game(fx, dict(X=random_player, O=player(alphabeta_search)), verbose=True)
+# ffx = play_game(fx, dict(X=random_player, O=player(minimax_search)), verbose=True)
+# ffx = play_game(fx, dict(X=player(alphabeta_search), O=player(alphabeta_search)), verbose=True)
+ffx = play_game(fx, dict(X=random_player, O=random_player), verbose=True)
 print("End", ffx.utility)
-# ffx = play_game(fx, dict(X=random_player, O=random_player), verbose=True)
 # print(fx.visit)
 
 
