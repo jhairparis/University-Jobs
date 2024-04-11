@@ -117,9 +117,7 @@ def alphabeta_search(game, state):
 class friends(Game):
     def __init__(self, n=5):
         self.n = n
-        self.initial = Board(height=1, width=n, to_move="X", utility=0).friendInit(n)
-        self.visit = {}
-        self.draw = False
+        self.initial = Board(height=1, width=n, to_move="X").friendInit(n)
 
     def actions(self, state):
         """Return a collection of the allowable moves from this state."""
@@ -149,20 +147,33 @@ class friends(Game):
         player = state.to_move
         opponent = "O" if player == "X" else "X"
 
-        self.visit[str(state)] = 1
-        state = state.new2({move: player}, to_move=opponent)
+        newState = state.new2({move: player}, to_move=opponent)
+        newState.visit[str(state)] = 1
 
-        return state
+        if self.is_terminal(newState):
+            if newState.visit.get(str(newState), -999) == 1:
+                newState.utility = 0
+            elif newState[self.n - 1, 0] == "X":
+                newState.utility = 1
+            elif newState[0, 0] == "O":
+                newState.utility = -1
+
+        old_new_state = {**state.visit, **newState.visit}
+        newState.visit = old_new_state
+        # print(newState.utility)
+
+        return newState
 
     def is_terminal(self, state):
         """Return True if this is a final state for the game."""
         win = False
-
         if state[self.n - 1, 0] == "X" or state[0, 0] == "O":
             win = True
-        if self.visit.get(str(state), -999) == 1:
+            return win
+        if state.visit.get(str(state), -999) == 1:
             win = True
-            self.draw = True
+            state.draw = True
+            return win
 
         return win
 
@@ -172,11 +183,11 @@ class friends(Game):
         win = self.is_terminal(state)
 
         if win:
-            if player == "X" and not self.draw:
+            if player == "X" and not state.draw:
                 utility = 1
-            if player == "O" and not self.draw:
+            if player == "O" and not state.draw:
                 utility = -1
-            if self.draw:
+            if state.draw:
                 utility = 0
 
         return utility
@@ -195,6 +206,9 @@ class Board(defaultdict):
         return ok1
 
     def __init__(self, width=8, height=8, to_move=None, **kwds):
+        self.draw = False
+        self.visit = {}
+        self.utility = 0
         self.__dict__.update(width=width, height=height, to_move=to_move, **kwds)
 
     def new(self, changes: dict, **kwds) -> "Board":
@@ -252,10 +266,12 @@ def player(search_algorithm):
 
 
 fx = friends(6)
-# ffx = play_game(fx, dict(X=random_player, O=player(alphabeta_search)), verbose=True)
-# ffx = play_game(fx, dict(X=random_player, O=player(minimax_search)), verbose=True)
+ffx = play_game(fx, dict(X=random_player, O=player(alphabeta_search)), verbose=True)
+ffx = play_game(fx, dict(X=random_player, O=player(minimax_search)), verbose=True)
+print("End", ffx.utility)
 # ffx = play_game(fx, dict(X=random_player, O=random_player), verbose=True)
 # print(fx.visit)
+
 
 """ XGame = friends(6)
 print(XGame.initial)
