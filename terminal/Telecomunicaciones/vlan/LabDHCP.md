@@ -1,6 +1,6 @@
 # Lab – Implement DHCPv4
 
-![Topology](../images/topology%20vlan%20lab.png)
+![Topology](../images/topology%20dhcp%20lab.png)
 
 | Device | Interface   | IP Address               | Subnet Mask     | Default Gateway |
 |--------|-------------|--------------------------|-----------------|-----------------|
