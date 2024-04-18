@@ -2,11 +2,15 @@
 
 The Commands Book is a comprehensive guide that provides step-by-step instructions for various operations and tasks. This book is particularly useful for those who are new to these commands or those who need a quick reference. The current edition includes detailed procedures for renaming a router using MobaXterm, complete with screenshots and commands. Each step is clearly explained, making it easy for users to follow along.
 
+> [!NOTE]  
+> to view file running or startup you can use `show running-config`
+
 ## Table of Contents
 
 1. [Rename Router](#rename-router)
 2. [Script Router Config](config_router.zsh)
 3. [Script Lab VLAN](./vlan/LabVLAN.md)
+4. [Script Lab DHCP](./vlan/LabDHCP.md)
 
 ## Rename Router
 
@@ -104,6 +108,3 @@ copy running-config startup-config
 **Image:**
 
 ![Screenshot of terminal](./images/Eight.png)
-
-> [!NOTE]  
-> to view file running or startup you can use `show running-config`

@@ -23,10 +23,11 @@ exit
 service password-encryption
 
 banner motd $ Authorized Users Only! $
-copy running-config startup-config
+exit
 
 clock set 13:30:00 18 April 2024
 
+conf t
 interface g0/0/1
 no shutdown
 exit
@@ -45,6 +46,12 @@ interface g0/0/1.1000
 encapsulation dot1q 1000 native
 description Native VLAN
 
+interface g0/0/0
+ip address 10.0.0.1 255.255.255.252
+no shutdown
+
+ip route 0.0.0.0 0.0.0.0 10.0.0.2
+
 ip dhcp excluded-address 192.168.1.1 192.168.1.5
 ip dhcp pool R1_Client_LAN
 network 192.168.1.0 255.255.255.192
@@ -58,6 +65,9 @@ network 192.168.1.96 255.255.255.240
 default-router 192.168.1.97
 domain-name ccna-lab.com
 lease 2 12 30
+
+exit
+exit
 
 copy running-config startup-config
 ```
@@ -85,10 +95,11 @@ exit
 service password-encryption
 
 banner motd $ Authorized Users Only! $
-copy running-config startup-config
+exit
 
 clock set 13:30:00 18 April 2024
 
+conf t
 interface g0/0/1
 ip address 192.168.1.97 255.255.255.240
 ip helper-address 10.0.0.1
@@ -96,15 +107,11 @@ no shutdown
 exit
 
 interface g0/0/0
-ip address 10.0.0.1 255.255.255.252
-no shutdown
-
-interface g0/0/0
 ip address 10.0.0.2 255.255.255.252
 no shutdown
 
-ip route 0.0.0.0 0.0.0.0 10.0.0.2
 ip route 0.0.0.0 0.0.0.0 10.0.0.1
+exit
 
 copy running-config startup-config
 ```
@@ -131,9 +138,10 @@ service password-encryption
 
 banner motd $ Authorized Users Only! $
 exit
-copy running-config startup-config
 
 clock set 13:30:00 18 April 2024
+
+conf t
 
 vlan 100
 name Clients
@@ -167,10 +175,11 @@ switchport mode trunk
 switchport trunk native vlan 1000
 switchport trunk allowed vlan 100,200,1000
 exit
+exit
 
 copy running-config startup-config
-
 ```
+
 ## Switch 2
 
 ```bash
@@ -193,9 +202,10 @@ service password-encryption
 
 banner motd $ Authorized Users Only! $
 exit
-copy running-config startup-config
 
 clock set 13:30:00 18 April 2024
+
+conf t
 
 interface vlan 1
 ip address 192.168.1.98 255.255.255.240
@@ -207,4 +217,7 @@ interface range f0/1 - 4, f0/6 - 17, f0/19 - 24, g0/1 - 2
 switchport mode access
 shutdown
 exit
+exit
+
+copy running-config startup-config
 ```
