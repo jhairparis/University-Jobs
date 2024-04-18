@@ -43,25 +43,25 @@ exit
 clock set 13:30:00 18 April 2024
 
 conf t
-interface g0/0/1
+interface g0/1
 no shutdown
 exit
 
-interface g0/0/1.100
+interface g0/1.100
 description Client Network
 encapsulation dot1q 100
 ip address 192.168.1.1 255.255.255.192
 
-interface g0/0/1.200
+interface g0/1.200
 encapsulation dot1q 200
 description Management Network
 ip address 192.168.1.65 255.255.255.224
 
-interface g0/0/1.1000
+interface g0/1.1000
 encapsulation dot1q 1000 native
 description Native VLAN
 
-interface g0/0/0
+interface g0/0
 ip address 10.0.0.1 255.255.255.252
 no shutdown
 
@@ -115,13 +115,13 @@ exit
 clock set 13:30:00 18 April 2024
 
 conf t
-interface g0/0/1
+interface g0/1
 ip address 192.168.1.97 255.255.255.240
 ip helper-address 10.0.0.1
 no shutdown
 exit
 
-interface g0/0/0
+interface g0/0
 ip address 10.0.0.2 255.255.255.252
 no shutdown
 
