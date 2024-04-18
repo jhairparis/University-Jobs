@@ -11,6 +11,10 @@
     {
       "name": "settings",
       "path": "../.vscode"
+    },
+    {
+      "name": "Terminal",
+      "path": "../terminal"
     }
   ],
   "settings": {
