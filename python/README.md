@@ -7,4 +7,5 @@ All my code write in `.py`
 1. [Automatas](./automatas/README.md)
 2. [Investigacion de Operaciones](./InvestigacionOperaciones/README.md)
 3. [Inteligencia Artificial](./IA/README.md)
+3. [Software 2](./software2/README.md)
 
