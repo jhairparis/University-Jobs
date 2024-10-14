@@ -4,9 +4,13 @@ import java.awt.Color;
 import java.util.ArrayList;
 // import java.awt.BasicStroke;
 import java.awt.Dimension;
+import java.text.DecimalFormat;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
+import org.jfree.chart.axis.SymbolAxis;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.chart.ui.ApplicationFrame;
 import org.jfree.chart.plot.XYPlot;
@@ -20,20 +24,27 @@ public class Graph extends ApplicationFrame {
 	private XYSeriesCollection dataset = new XYSeriesCollection();
 	private String xAxisLabel = "Category";
 	private String yAxisLabel = "Score";
+	private SymbolAxis sa;
 
 	public Graph() {
 		super("");
 	}
 
-	public void createDataset(ArrayList<Number> x, ArrayList<Number> y, String name) {
-		final XYSeries search = new XYSeries(name);
+	public void createDataset(ArrayList<Double> x, ArrayList<Double> y, String name) {
+		XYSeries search = new XYSeries(name);
+		String[] xAxis = new String[x.size()];
 
 		if (x.size() != y.size())
 			return;
 
-		for (int i = 0; i < x.size(); i++)
-			search.add(x.get(i), y.get(i));
+		for (int i = 0; i < x.size(); i++) {
+			search.add(i, y.get(i));
+			DecimalFormat df = new DecimalFormat("0.#E0");
+			df.setMaximumFractionDigits(3);
+			xAxis[i] = df.format(x.get(i));
+		}
 
+		sa = new SymbolAxis(xAxisLabel, xAxis);
 		dataset.addSeries(search);
 	}
 
@@ -50,6 +61,8 @@ public class Graph extends ApplicationFrame {
 		chartPanel.setPreferredSize(new Dimension(560, 367));
 
 		XYPlot plot = xylineChart.getXYPlot();
+		if (sa != null)
+			plot.setDomainAxis(sa);
 		XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
 		renderer.setSeriesPaint(0, Color.RED);
 		renderer.setSeriesPaint(1, Color.GREEN);
