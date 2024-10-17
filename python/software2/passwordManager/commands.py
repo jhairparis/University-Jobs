@@ -1,4 +1,5 @@
 from password_manager import PasswordManager
+from tabulate import tabulate
 
 
 class Command:
@@ -59,11 +60,16 @@ class GetPasswordCommand(Command):
         service = args[0]
         data = self.manager.get_password(service)
         if data:
-            print(f"Service: {service}")
-            print(f"Username: {data['username']}")
-            print(f"Password: {data['password']}")
-            if data["service_name"]:
-                print(f"Service Name: {data['service_name']}")
+            table = [
+                ["Service", service],
+                ["Username", data["username"]],
+                ["Password", data["password"]],
+                [
+                    "Service Name",
+                    data["service_name"] if data["service_name"] else "N/A",
+                ],
+            ]
+            print(tabulate(table, tablefmt="simple"))
         else:
             print(f"No password found for '{service}'.")
 
@@ -95,6 +101,21 @@ class DeletePasswordCommand(Command):
         print(f"Password for '{service}' deleted successfully.")
 
 
+class ListServicesCommand(Command):
+    def __init__(self, manager):
+        self.manager = manager
+
+    def execute(self, *args):
+        services = self.manager.list_services()
+        if services:
+            print("\nStored Services:")
+            for service in services:
+                print(f"- {service}")
+            print()
+        else:
+            print("No services found.")
+
+
 class CommandManager:
     def __init__(self):
         self.manager = PasswordManager()
@@ -105,6 +126,7 @@ class CommandManager:
             "get": GetPasswordCommand(self.manager),
             "update": UpdatePasswordCommand(self.manager),
             "delete": DeletePasswordCommand(self.manager),
+            "list_services": ListServicesCommand(self.manager),
         }
 
     def execute(self, command_line):

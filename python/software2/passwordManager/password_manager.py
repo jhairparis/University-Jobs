@@ -116,3 +116,12 @@ class PasswordManager:
             """,
                 (service,),
             )
+
+    def list_services(self):
+        cursor = self.conn.execute(
+            """
+            SELECT service FROM passwords
+        """
+        )
+        rows = cursor.fetchall()
+        return [row[0] for row in rows]

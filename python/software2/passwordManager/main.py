@@ -43,6 +43,7 @@ def print_help():
     - get <service>: Retrieve the password for a service.
     - update <service> <username> <new_password> [service_name]: Update the password for a service.
     - delete <service>: Delete the password for a service.
+    - list_services: List all stored services.
     - help: Show this help message.
     - exit: Exit the Password Manager.
     """
